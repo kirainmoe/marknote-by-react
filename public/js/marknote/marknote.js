@@ -2,6 +2,34 @@
 
 var converter = new Remarkable();					//import remarkable markdown converter
 
+var NoteList = React.createClass({
+
+	render : function () {
+		return (
+			<div className="note-list" ref="noteList">
+				{this.loadNotes}
+			</div>
+			);
+	},
+
+	loadNotes : function () {
+
+		console.log(2333);
+
+		_kit.ajax({
+			type : "GET",
+			url : "/api/showNote",
+			success : function (data) {
+				console.log(data);
+			},
+			error : function (error) {
+				console.log("Error occured.");
+			}
+		});
+	}
+
+});
+
 var ShowTheEditor = React.createClass({
 
 	render : function () {
@@ -165,7 +193,7 @@ var StatusBar = React.createClass({
 	render: function () {
 		return (
 			<div id="status-bar" className="status-bar">
-				<textarea id="titleInput" className="input-text" placeholder="Title.." refs="titleInput"></textarea>
+				<textarea id="titleInput" className="input-text" placeholder="Title.." ref="titleInput"></textarea>
 				<button id="fadeOut" className="fadeout-button" onClick={this.fadeOut}>Hide Editor</button>
 				<button id="submiter" className="submit-button" onClick={this.save}>Save Note</button>
 			</div>
@@ -179,7 +207,7 @@ var StatusBar = React.createClass({
 	 */
 	save: function () {
 		document.getElementById("submiter").innerHTML = "Saving...";
-
+		
 		var textarea  = document.getElementById("textarea"),
 		    rawText   = textarea.value,
 		    timestamp = (new Date()).valueOf();
@@ -189,6 +217,7 @@ var StatusBar = React.createClass({
 			rawText: rawText,
 			timestamp: timestamp
 		};
+
 
 		var dataJson = JSON.stringify(dataObj);
 
@@ -215,6 +244,7 @@ var StatusBar = React.createClass({
 
 ReactDOM.render(
 	(<div style={{height: "100%"}} id="marknote-editor">
+		<NoteList />
 		<ShowTheEditor />
 		<Markdown />
 		<StatusBar />

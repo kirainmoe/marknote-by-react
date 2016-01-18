@@ -2,12 +2,12 @@ var fs = require('fs');
 
 var ApiModel = {
 	/**
-	 * add Note to notes.json
+	 * add Note to file
 	 *
 	 * @param {[type]} dataObj [description]
 	 */
 	addNote : function (dataObj) {
-		var noteFile = fs.readFileSync("./notes.json", "UTF-8");
+		var noteFile = fs.readFileSync(config.dataFile, "UTF-8");
 
 		var currentId = noteFile == "" ? 1 : noteFile.split("\n").length + 1;
 
@@ -20,13 +20,13 @@ var ApiModel = {
 	},
 
 	/**
-	 * remove Note from notes.json
+	 * remove Note from file
 	 *
 	 * @param  {int} noteId
 	 * @return {void}
 	 */
 	removeNote : function (noteId) {
-		var notes   = fs.readFileSync("./notes.json", "UTF-8"),
+		var notes   = fs.readFileSync(config.dataFile, "UTF-8"),
 		   notesArr = notes.split(",\n");
 		/* Find proper id */
 		for (var i = 0; i < notesArr.length; i ++)
@@ -48,7 +48,7 @@ var ApiModel = {
 	 */
 	showNote : function (noteId)
 	{
-		var noteStr = fs.readFileSync("./notes.json", "UTF-8");
+		var noteStr = fs.readFileSync(config.dataFile, "UTF-8");
 
 		if (noteId == false) {
 			return noteStr;
@@ -70,8 +70,8 @@ var ApiModel = {
 	 * @return {void}
 	 */
 	writeIn : function (str) {
-		fs.writeFile('./notes.json', str, function (err) {
-			console.log("New JSON has been written in ./notes.json.");
+		fs.writeFile(config.dataFile, str, function (err) {
+			console.log("New note has been written in file.");
 		});
 	}
 };

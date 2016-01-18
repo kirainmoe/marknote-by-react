@@ -5,11 +5,15 @@
  * @link https://kirainmoe.com
  */
 
+global.config = require('./config');
+
 global.express = require('express');
 global.app  = express();
 
 var router = require('./router.js');
 
-var server = app.listen(8888, function () {
-	console.log("Server running at http://localhost:8888/");
+var server = app.listen(config.serverPort, function () {
+
+	console.log("Server running at http://localhost:" + config.serverPort + "/");
+
 });

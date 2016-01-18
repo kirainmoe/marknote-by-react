@@ -14,7 +14,8 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 15px 0px;
 }
 
-h1::before, h2::before, h3::before, h4::before {
+.marknote-displayer h1::before, .marknote-displayer h2::before, 
+.marknote-displayer h3::before, .marknote-displayer h4::before {
 	content: "#";
 	margin-right: 5px;
 	color: #999;
@@ -69,7 +70,7 @@ code {
 	color: #fff;
 	border: 0;
 
-	font-size: 18px;
+	font-size: 22px;
 	font-family: "Microsoft Yahei", "WenQuanYi Micro Hei";
 
 	resize: none;
@@ -124,10 +125,11 @@ code {
 	font-size:26px;
 
 	resize: none;
+	font-family: "Microsoft Yahei", "WenQuanYi Micro Hei";
 }
 
 #marknote-editor {
-	transform : translateY(0px);
+	transform : translateY(100%);
 	transition : .3s all;
 	-ms-transition : .3s all;
 	-moz-transition : .3s all;

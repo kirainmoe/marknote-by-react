@@ -9,7 +9,7 @@ class IndexController
    * index page
    */
     index (request, response) {
-      	response.render("index");
+      	response.render("index", {title : config.title});
     }
 }
 
