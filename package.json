@@ -1,0 +1,32 @@
+{
+  "name": "marknote-by-react",
+  "version": "1.0.0",
+  "description": "A markdown notebook written by express and React",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.13.4",
+    "body-parser": "^1.15.1",
+    "jade": "^1.11.0"
+  },
+
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirainmoe/marknote-by-react.git"
+  },
+  "keywords": [
+    "markdown",
+    "express",
+    "react",
+    "notebook"
+  ],
+  "author": "kirainmoe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kirainmoe/marknote-by-react/issues"
+  },
+  "homepage": "https://github.com/kirainmoe/marknote-by-react#readme"
+}

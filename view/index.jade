@@ -1,0 +1,20 @@
+doctype html
+html
+	head
+		meta(charset="UTF-8")
+		title MarkNote - Powered by React.js
+
+		link(rel="stylesheet", type="text/css", href="css/marknote.css")
+		link(rel="stylesheet", type="text/css", href="css/prism.css")
+
+		script(type="text/javascript", src="js/react/react.min.js")
+		script(type="text/javascript", src="js/react/react-dom.min.js")
+		script(type="text/javascript", src="js/babel/browser.min.js")
+		script(type="text/javascript", src="js/prism/prism.js")
+		script(type="text/javascript", src="js/remarkable/dist/remarkable.min.js")
+
+	body
+		div(id="marknote")
+
+		script(type="text/babel", src="js/marknote/toolkit.js")
+		script(type="text/babel", src="js/marknote/marknote.js")

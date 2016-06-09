@@ -1,0 +1,112 @@
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0px;
+	height: 100%;
+	
+	font-size: 18px;
+	font-family: "Microsoft Yahei", "WenQuanYi Micro Hei";
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 15px 0px;
+}
+
+h1::before, h2::before, h3::before, h4::before {
+	content: "#";
+	margin-right: 5px;
+	color: #999;
+}
+
+p {
+	margin: 10px 0px;
+}
+
+blockquote {
+	margin: 0px;
+	padding-left: 15px;
+	border-left: 7px solid #eee;	
+}
+
+pre {
+	background-color: #dedede;
+	padding: 10px;
+	border:1px solid rgba(0,0,0,0.1);
+	color: #c92c2c;
+	border-radius: 0.3em;
+	font-family: "Consolas";
+	font-style: italic;
+}
+
+code {
+	font-family: "Consolas";
+	font-style: italic;
+}
+
+.marknote-container , #marknote {
+	width: 100%;
+	height: 100%;
+
+	overflow: hidden;
+}
+
+.marknote-container {
+	position: relative;
+}
+
+.marknote-textarea {
+	width: 50%;
+	height: 90%;
+
+	padding: 15px 10px;
+
+	float: left;
+	display: inline-block;
+
+	background-color: #000;
+	color: #fff;
+	border: 0;
+
+	font-size: 18px;
+	font-family: "Microsoft Yahei", "WenQuanYi Micro Hei";
+
+	resize: none;
+	outline: 0;
+}
+
+.marknote-displayer {
+	width: 50%;
+	height: 90%;
+
+	padding: 5px 10px;
+	background-color: #fff;
+
+	overflow: auto;
+	display: inline-block;
+}
+
+.status-bar {
+	position: absolute;
+	bottom: 0px;
+
+	width: 100%;
+	height: 10%;
+
+	background-color: #9E9E9E;
+}
+
+.submit-button {
+	margin: 0px;
+	padding: 10px;
+	height: 100%;
+	float: right;
+	width: 100%;
+
+	font-size: 20px;
+	color: #fff;
+
+	background-color: #607D8B;
+	border: 0px;
+}
