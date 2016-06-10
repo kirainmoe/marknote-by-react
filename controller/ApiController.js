@@ -13,6 +13,13 @@ var ApiController = {
 		ApiModule.addNote(dataObj);
 
 		response.send(JSON.stringify({status:1, info:"JSON has been written in."}));
+	},
+
+	removeNote : function (request, response) {
+		var toRemoveId = request.query.targetId;
+		ApiModule.removeNote(toRemoveId);
+
+		response.send(JSON.stringify({statue:1, info:"Changes has been applied."}));
 	}
 };
 

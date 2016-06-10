@@ -1,17 +1,54 @@
 var fs = require('fs');
 
 var ApiModule = {
+	/**
+	 * add Note to notes.json
+	 *
+	 * @param {[type]} dataObj [description]
+	 */
 	addNote : function (dataObj) {
-		var json = JSON.stringify(dataObj),
-				noteFile = fs.readFileSync('./notes.json', "UTF-8");
+		var noteFile = fs.readFileSync("./notes.json", "UTF-8");
 
-		if (noteFile != '') 
-			var dataToWrite = noteFile + ",\n" + json;
-		else
-			var dataToWrite = json;
-		
-		fs.writeFile('./notes.json', dataToWrite, function (err) {
-			console.log("JSON has been written in ./notes.json.");
+		var currentId = nodeFile == "" ? 1 : noteFile.split("\n").length + 1;
+
+		dataObj.id = currentId;
+		var  json = JSON.stringify(dataObj);
+
+		var dataToWrite = noteFile == "" ? json : noteFile + ",\n" + json;
+
+		this.writeIn(dataToWrite);
+	},
+
+	/**
+	 * remove Note from notes.json
+	 *
+	 * @param  {int} noteId
+	 * @return {void}
+	 */
+	removeNote : function (noteId) {
+		var notes   = fs.readFileSync("./notes.json", "UTF-8"),
+		   notesArr = notes.split(",\n");
+		/* Find proper id */
+		for (var i = 0; i < notesArr.length; i ++)
+		{
+			var thisCid = JSON.parse(notesArr[i]).id;
+			if (thisCid == noteId) {
+				notesArr.splice(i, 1);
+			}
+		}
+		var newStr = notesArr.join(",\n");
+		this.writeIn(newStr);
+	},
+
+	/**
+	 * apply edition
+	 * 
+	 * @param  {string} str
+	 * @return {void}
+	 */
+	writeIn : function (str) {
+		fs.writeFile('./notes.json', str, function (err) {
+			console.log("New JSON has been written in ./notes.json.");
 		});
 	}
 };

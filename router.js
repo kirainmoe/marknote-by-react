@@ -19,3 +19,4 @@ app.get("/", function (request, response) {
 var ApiController = require('./controller/ApiController');
 
 app.post("/api/addNote", ApiController.addNote);
+app.get("/api/removeNote", ApiController.removeNote);
