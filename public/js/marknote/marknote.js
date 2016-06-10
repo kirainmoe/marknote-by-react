@@ -4,15 +4,15 @@ var converter = new Remarkable();					//import remarkable markdown converter
 
 /**
  * <Markdown /> Component
- * 
+ *
  * contains Editor and Displayer
  */
 var Markdown = React.createClass({
 
 	/**
 	 * initial state
-	 * 
-	 * @return {object} 
+	 *
+	 * @return {object}
 	 */
 	getInitialState: function () {
 		return {
@@ -22,13 +22,13 @@ var Markdown = React.createClass({
 
 	/**
 	 * render DOM node
-	 * 
-	 * @return {mixed} 
+	 *
+	 * @return {mixed}
 	 */
 	render: function () {
 		return (
 			<div className="marknote-container">
-			<textarea onChange={this.markItUp} spellCheck="false" ref="textareas" id="textarea" className="marknote-textarea" defaultValue="Write some text here and it will be converted to Markdown!">
+			<textarea onKeyDown={this.responseTab} onChange={this.markItUp} spellCheck="false" ref="textareas" id="textarea" className="marknote-textarea" defaultValue="Write some text here and it will be converted to Markdown!">
 			</textarea>
 			<div className="marknote-displayer" id="displayer" dangerouslySetInnerHTML={{__html: this.state.text}}></div>
 			</div>
@@ -37,8 +37,8 @@ var Markdown = React.createClass({
 
 	/**
 	 * markdown convert
-	 * 
-	 * @return {void} 
+	 *
+	 * @return {void}
 	 */
 	markItUp: function () {
 		var text = this.refs.textareas.value;
@@ -71,36 +71,84 @@ var Markdown = React.createClass({
 
 	/**
 	 * HTML decoder
-	 * 
-	 * @param  {string} str 
-	 * @return {string}     
+	 *
+	 * @param  {string} str
+	 * @return {string}
 	 */
 	htmlDecode: function(str) {
-		var s = "";   
-		if (str.length == 0) return "";   
-		s = str.replace(/&amp;/g, "&");   
-		s = s.replace(/&lt;/g, "<");   
-		s = s.replace(/&gt;/g, ">");   
-		s = s.replace(/&nbsp;/g, " ");   
-		s = s.replace(/&#39;/g, "\'");   
-		s = s.replace(/&quot;/g, "\"");   
-		s = s.replace(/<br>/g, "\n");   
-		return s;   
+		var s = "";
+		if (str.length == 0) return "";
+		s = str.replace(/&amp;/g, "&");
+		s = s.replace(/&lt;/g, "<");
+		s = s.replace(/&gt;/g, ">");
+		s = s.replace(/&nbsp;/g, " ");
+		s = s.replace(/&#39;/g, "\'");
+		s = s.replace(/&quot;/g, "\"");
+		s = s.replace(/<br>/g, "\n");
+		return s;
+	},
+
+	/**
+	 * handle keydown of Tab to resize
+	 * 
+	 * @param  {object} event
+	 * @return {void}
+	 */
+	responseTab : function (event) {
+		event = event || window.event;
+		var element = this.refs.textareas,
+				keyCode = event.keyCode || event.which;
+
+		if (keyCode == 9) {
+			var start = element.selectionStart,
+					end		= element.selectionEnd,
+					value = element.value;
+
+			var lineStart = value.lastIndexOf('\n', start),
+					lineEnd		= value.indexOf('\n', end),
+					offset		= 0;
+
+			if (lineStart == -1)	lineStart = 0;
+			if (lineEnd == -1)	lineEnd = value.length;
+
+			if (lineStart == lineEnd);
+			else if (lineStart != 0)		lineStart += 1;
+
+			var lines = value.substring(lineStart, lineEnd).split('\n');
+			if (lines.length > 1) {
+				offset = lines.length;
+				lines = "\t" + lines.join('\n\t');
+
+				element.value = value.substring(0, lineStart) + lines
+											+ value.substring(lineEnd);
+				element.selectionStart = start + 1;
+				element.selectionEnd 	 = end + offset;
+			} else {
+				offset = 1;
+				lines = lines[0];
+
+				element.value = value.substring(0, start) + '\t'
+											+ value.substring(end);
+				element.selectionStart = element.selectionEnd = start + offset;
+			}
+
+			event.preventDefault();
+		}
 	}
 
 });
 
 /**
  * <StatusBar /> Component
- * 
+ *
  * contains save button and so on...
  */
 var StatusBar = React.createClass({
 	/**
 	 * render DOM node
-	 * 
-	 * @return {mixed} 
-	 */	
+	 *
+	 * @return {mixed}
+	 */
 	render: function () {
 		return (
 			<div id="status-bar" className="status-bar">
@@ -111,8 +159,8 @@ var StatusBar = React.createClass({
 
 	/**
 	 * save notes
-	 * 
-	 * @return {void} 
+	 *
+	 * @return {void}
 	 */
 	save: function () {
 		document.getElementById("submiter").innerHTML = "Saving...";
