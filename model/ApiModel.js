@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-var ApiModule = {
+var ApiModel = {
 	/**
 	 * add Note to notes.json
 	 *
@@ -41,8 +41,31 @@ var ApiModule = {
 	},
 
 	/**
-	 * apply edition
+	 * show Note detail
 	 * 
+	 * @param  {mixed} noteId
+	 * @return {string}
+	 */
+	showNote : function (noteId)
+	{
+		var noteStr = fs.readFileSync("./notes.json", "UTF-8");
+
+		if (noteId == false) {
+			return noteStr;
+		} else {
+				var seprater = noteStr.split(",\n");
+				for (var i = 0; i < seprater.length; i ++ )
+				{
+					thisCid = JSON.parse(seprater[i]).id;
+					if (thisCid == noteId)
+						return seprater[i];
+				}	//for
+		}
+	},
+
+	/**
+	 * apply edition
+	 *
 	 * @param  {string} str
 	 * @return {void}
 	 */
@@ -53,4 +76,4 @@ var ApiModule = {
 	}
 };
 
-module.exports = ApiModule;
+module.exports = ApiModel;
