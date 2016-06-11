@@ -2,6 +2,19 @@
 
 var converter = new Remarkable();					//import remarkable markdown converter
 
+var ShowTheEditor = React.createClass({
+
+	render : function () {
+		return (<div className="show-editor" id="ShowTheEditor" onClick={this.show}> Editor </div>);
+	},
+
+	show : function () {
+		var element = document.getElementById("marknote-editor");
+		element.style.transform  = "translateY(0px)";
+	}
+
+});
+
 /**
  * <Markdown /> Component
  *
@@ -28,9 +41,9 @@ var Markdown = React.createClass({
 	render: function () {
 		return (
 			<div className="marknote-container">
-			<textarea onKeyDown={this.responseTab} onChange={this.markItUp} spellCheck="false" ref="textareas" id="textarea" className="marknote-textarea" defaultValue="Write some text here and it will be converted to Markdown!">
-			</textarea>
-			<div className="marknote-displayer" id="displayer" dangerouslySetInnerHTML={{__html: this.state.text}}></div>
+				<textarea onKeyDown={this.responseTab} onChange={this.markItUp} spellCheck="false" ref="textareas" id="textarea" className="marknote-textarea" defaultValue="Write some text here and it will be converted to Markdown!">
+				</textarea>
+				<div className="marknote-displayer" id="displayer" dangerouslySetInnerHTML={{__html: this.state.text}}></div>
 			</div>
 			);
 	},
@@ -90,7 +103,7 @@ var Markdown = React.createClass({
 
 	/**
 	 * handle keydown of Tab to resize
-	 * 
+	 *
 	 * @param  {object} event
 	 * @return {void}
 	 */
@@ -152,7 +165,9 @@ var StatusBar = React.createClass({
 	render: function () {
 		return (
 			<div id="status-bar" className="status-bar">
-			<button id="submiter" className="submit-button" onClick={this.save}>Save Note</button>
+				<textarea id="titleInput" className="input-text" placeholder="Title.." refs="titleInput"></textarea>
+				<button id="fadeOut" className="fadeout-button" onClick={this.fadeOut}>Hide Editor</button>
+				<button id="submiter" className="submit-button" onClick={this.save}>Save Note</button>
 			</div>
 			);
 	},
@@ -170,6 +185,7 @@ var StatusBar = React.createClass({
 		    timestamp = (new Date()).valueOf();
 
 		var dataObj = {
+			title : this.refs.titleInput.value,
 			rawText: rawText,
 			timestamp: timestamp
 		};
@@ -188,11 +204,18 @@ var StatusBar = React.createClass({
 			}
 		});
 
+	},
+
+	fadeOut : function () {
+		var containerRefs = document.getElementById("marknote-editor");
+
+		containerRefs.style.transform = "translateY(100%)";
 	}
 });
 
 ReactDOM.render(
-	(<div style={{height: "100%"}} id="marknote-row">
+	(<div style={{height: "100%"}} id="marknote-editor">
+		<ShowTheEditor />
 		<Markdown />
 		<StatusBar />
 		</div>),

@@ -5,7 +5,7 @@
 html, body {
 	margin: 0px;
 	height: 100%;
-	
+
 	font-size: 18px;
 	font-family: "Microsoft Yahei", "WenQuanYi Micro Hei";
 }
@@ -27,7 +27,7 @@ p {
 blockquote {
 	margin: 0px;
 	padding-left: 15px;
-	border-left: 7px solid #eee;	
+	border-left: 7px solid #eee;
 }
 
 pre {
@@ -97,16 +97,56 @@ code {
 	background-color: #9E9E9E;
 }
 
-.submit-button {
+.submit-button, .fadeout-button {
+	float: right;
 	margin: 0px;
 	padding: 10px;
+
 	height: 100%;
-	float: right;
-	width: 100%;
+	width: 25%;
 
 	font-size: 20px;
 	color: #fff;
 
 	background-color: #607D8B;
 	border: 0px;
+	border-right :2px solid #9E9E9E;
+}
+
+.input-text {
+	width: 50%;
+	height: 100%;
+
+	display : inline-block;
+	float : left;
+
+	padding: 15px;
+	font-size:26px;
+
+	resize: none;
+}
+
+#marknote-editor {
+	transform : translateY(0px);
+	transition : .3s all;
+	-ms-transition : .3s all;
+	-moz-transition : .3s all;
+	-webkit-transition : .3s all;
+}
+
+.show-editor {
+	position : absolute;
+	top: -50px;
+	right: 0px;
+
+	width: 10%;
+	height: 50px;
+
+	font-size: 20px;
+	line-height: 50px;
+	text-align : center;
+
+	color: #fff;
+	background: #607D8B;
+	cursor: pointer;
 }

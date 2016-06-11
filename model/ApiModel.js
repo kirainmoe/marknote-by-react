@@ -9,7 +9,7 @@ var ApiModel = {
 	addNote : function (dataObj) {
 		var noteFile = fs.readFileSync("./notes.json", "UTF-8");
 
-		var currentId = nodeFile == "" ? 1 : noteFile.split("\n").length + 1;
+		var currentId = noteFile == "" ? 1 : noteFile.split("\n").length + 1;
 
 		dataObj.id = currentId;
 		var  json = JSON.stringify(dataObj);
@@ -42,7 +42,7 @@ var ApiModel = {
 
 	/**
 	 * show Note detail
-	 * 
+	 *
 	 * @param  {mixed} noteId
 	 * @return {string}
 	 */

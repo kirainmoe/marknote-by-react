@@ -12,14 +12,13 @@ var path = require('path');
 
 app.use(express.static('./public'));
 
+/**
+ * / --- IndexController
+ */
+var IndexController = require('./controller/IndexController');
 /* Index Page */
-app.get("/", function (requset, response) {
 
-});
-/* Markdown Editor */
-app.get("/editor", function (request, response) {
-	response.render("editor");
-});
+app.get("/",  IndexController.index);
 
 /**
  * /api --- ApiController
