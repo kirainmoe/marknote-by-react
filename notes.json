@@ -1,1 +1,1 @@
-{"content":"```c\n#include <stdio.h>\nint main(void)\n{\n\tprintf(\"Hello, world!\\n\");\n\tgetchar();\n\treturn 0;\n}\n```","time":"1465655345062","id":1}
+
